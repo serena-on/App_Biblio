@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Home</title>
+</head>
+<body>
+  <div class="wrapper">
+    <form action="./liste.php" method="get">
+      <fieldset>
+        <legend>Search</legend>
+        <div>
+          <label>
+            Your search
+            <input type="date" name="searchByDate">
+          </label>
+        </div>
+        <div class="button-container">
+          <button type="submit">Rechercher</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <script>
+    let form = document.querySelector('form')
+    form.addEventListener('submit', (ev) => {
+      ev.preventDefault()
+      let text = form.searchByDate.value.trim()
+      if (text.length === 0) {
+        alert('Select a Date.')
+        return
+      }
+      form.submit()
+    })
+
+    const urlParams = new URLSearchParams(window.location.search)
+
+    const invalidInput = urlParams.get('invalid_input')
+    if (invalidInput) {
+      alert('Select a Date.')
+    }
+
+    const error = urlParams.get('error')
+    if (error) {
+      alert('Unable to process your query. Please try again.')
+    }
+  </script>
+</body>
+</html>
